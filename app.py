@@ -8,7 +8,7 @@ os.environ['OPENAI_API_KEY'] = os.getenv('OPENAI_KEY')
 
 def chatBot():
     chatbot = ChatBot.pdf_chat(
-        input_files=["/content/sample_data/physics.pdf"],
+        input_files=["physics.pdf"],
     )
 
     return chatbot
@@ -17,7 +17,8 @@ def chatBot():
 if __name__ == "__main__":
     st.header('Test App')
     question = st.text_input('Enter your question: ')
-    agent = chatBot()
-    response = agent.chat("What is reflection")
-    if st.button('Get'):
-        st.write(response.response)
+    if question is not None:
+        if st.button('Get'):
+            agent = chatBot()
+            response = agent.chat(question)
+            st.write(response.response)
